@@ -101,14 +101,14 @@ $(document).ready(function(){
         //ターンカウントを1増やす
         turn = turn + 1
       }
-      // TODO:挟まっている石の色を変更する
-      var othelloChallenge = Othello();
+      //挟まっている石の色を変更する
+      //var othelloChallenge = Othello();
 
   });
   //マスにおける条件を満たしていない場合，仮置きを削除
   $('.img_batsu').on('click',function(){
       $('#no'+id).children().remove();
-      //TODO:石の色が変更しているかもしれないので確認する
+      //石の色が変更しているかもしれないので確認する
 
   });
 
@@ -121,7 +121,7 @@ $(document).ready(function(){
 
 //関数
 //全ての枠の石の色を調査・変更
-const Othello = function(){
+/*const Othello = function(){
   nowArray = [];
   //配列に現在のマスの色を格納する
   for(i=1; i<=36; i++){
@@ -134,9 +134,9 @@ const Othello = function(){
       nowArray.push(0);
     }//ifおわり
   } //現在のマスの色格納ここまで
-  
-}//Othello関数終わり
 
+}//Othello関数終わり
+*/
 
 //乱数生成
   function intRandom(min, max){
