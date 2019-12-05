@@ -1,0 +1,256 @@
+/*
+黄色：#fff1ac
+ぴんく：#f9bcdd
+濃いピンク：#d5a4cf
+むらさき：#b689b0
+あお：#2694ab
+あか：#ea7070
+*/
+body{
+  background-color: #fff1ac;
+}
+.table{
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 30px;
+  border: 2px solid #606060;
+  border-radius: 4px;
+  width: 714px;
+  height: 714px;
+  background-color: #fff;
+}
+/*[1,1]タイトル*/
+.title{
+  display: inline-block;
+  float: left;
+  border: 1px solid #606060;
+  width: 100px;
+  height: 100px;
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #b689b0;
+}
+.title span{
+  text-align: center;
+}
+/*条件枠*/
+.tc{
+  display: inline-block;
+  float: left;
+  border: 1px solid #606060;
+  width: 100px;
+  height: 100px;
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #f9bcdd;
+}
+/*オセロが入る枠*/
+.c{
+  display: inline-block;
+  float: left;
+  border: 1px solid #606060;
+  width: 100px;
+  height: 100px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #fff;
+}
+.c p{
+  font-size: 60pt;
+  font-weight: bold;
+  color: #ea7070;
+  text-align: center;
+  margin: -10px ;
+}
+
+/*検索ボックス*/
+.search_box{
+  position: relative;
+  left: 55%;
+  top: 30px;
+  border: 2px solid #404040;
+  border-radius: 4px;
+  width: 300px;
+  height: 150px;
+  background-color: #fff;
+
+}
+/*テキストボックス*/
+.text_box{
+  position: relative;
+  width: 85%;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.text_box input[type=text]{
+  font:15px/24px sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 8px 0;
+  padding: 0.3em;
+  padding-left: 12px;
+  transition: 0.3s;
+  border: 2px solid #b689b0;
+  border-radius: 4px;
+  outline: none;
+}
+/*検索ボタン*/
+.search_btn{
+  display: inline-block;
+  width: 40%;
+  text-align: center;
+  color: #b689b0;
+  background-color: #b689b0;
+  border: 2px solid #b689b0;
+  font-size: 12pt;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 3px;
+  position: relative;
+  margin-top:5px;
+  margin-left: 25%;
+}
+.search_btn span{
+  position: relative;
+  z-index: 1
+}
+.search_btn:before,
+.search_btn:after{
+  content:"";
+  display: block;
+  color:#b689b0;
+  background-color: #fff;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: .2s;
+}
+.search_btn:before{
+  left: 0;
+}
+.search_btn:after{
+  right: 0;
+}
+.search_btn:hover:before,
+.search_btn:hover:after{
+  width: 0;
+  color: #b689b0;
+  background-color: #fff;
+}
+.search_btn:hover{
+  color: #fff;
+  background-color: #b689b0;
+}
+/*得点ボックス*/
+.point_box{
+  position: relative;
+  left: 55%;
+  margin-top: 50px;
+  border: 2px solid #404040;
+  border-radius: 4px;
+  width: 300px;
+  height: 540px;
+  background-color: #fff;
+}
+.point_title{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.point_title h1{
+  font-family: sans-serif;
+  font-size: 12pt;
+  color: #404040;
+  padding-left: 10px;
+  border-bottom: 4px double #ccc;
+}
+.img_maru{
+  width: 30%;
+  height: 30%;
+  position: relative;
+  float: left;
+  border: 1px dashed #404040;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 15%;
+  margin-bottom: 15px;
+}
+.img_batsu{
+  width: 30%;
+  height: 30%;
+  position: relative;
+  float: left;
+  border: 1px dashed #404040;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15%;
+  margin-bottom: 15px;
+}
+.point_aka_title{
+  position: relative;
+  float:left;
+  width: 90px;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  color: #ea7070;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 45px;
+  background-color: #ccc;
+}
+.point_ao_title{
+  position: relative;
+  float:left;
+  width: 90px;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  color: #2694ab;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 20px;
+  background-color: #ccc;
+}
+.point_aka{
+  border: 1px solid #404040;
+  border-radius: 3px;
+  background-color: #404040;
+  width: 90px;
+  height: 90px;
+  float: left;
+  margin-top: 1px;
+  margin-right: 10px;
+  margin-left: 15%;
+  margin-bottom: 15px;
+}
+.aka_pt{
+  font-size: 48pt;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+.point_ao{
+  border: 1px solid #404040;
+  border-radius: 3px;
+  background-color: #404040;
+  width: 90px;
+  height: 90px;
+  float: left;
+  margin-top: 1px;
+  margin-right: 15%;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+.ao_pt{
+  font-size: 48pt;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
