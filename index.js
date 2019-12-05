@@ -1,8 +1,51 @@
 //[ue,shita,migi,hidari,migiue,hidariue,migishita,hidarishita]
 $(document).ready(function(){
-  //初期の4枚のうち2枚を青に変更する
+  //初期の4枚を色変え
   $('#no15').children().css('color','#2694ab');
+  $('#no16').children().css('color','#ea7070');
+  $('#no21').children().css('color','#ea7070');
   $('#no22').children().css('color','#2694ab');
+
+  //地域をランダムで表示させる
+  var region_data =['日本','中国','イギリス','フランス','ロシア','イスラム','南北アメリカ','アジア','ヨーロッパ','東南アジア'];
+  region_random = [];
+  var min = 1;
+  var region_max = region_data.length;
+  //重複しない乱数を生成する
+  for(i = min; i <= region_max; i++){
+    while(true){
+      var tmp = intRandom(min, region_max);
+      if(!region_random.includes(tmp)){
+        region_random.push(tmp);
+        break;
+      }
+    }
+  }
+  for(i=1;i<=6;i++){
+    var k = region_random[i]
+    $('#region'+(i)).append('<p style="font-size:14pt">' + region_data[k-1] + '</p>');
+  }
+  //年代を反映
+  var age_data = ['2000〜','1600<br>〜<br>1800','1200<br>〜<br>1400','1914<br>〜<br>1945','1500<br>〜<br>1700','800<br>〜<br>1000','紀元前','500<br>〜<br>1000'];
+  age_random = [];
+  var age_max = age_data.length;
+  //重複しない乱数を生成する
+  for(i = min; i <= age_max; i++){
+    while(true){
+      var tmp = intRandom(min, age_max);
+      if(!age_random.includes(tmp)){
+        age_random.push(tmp);
+        break;
+      }
+    }
+  }
+  for(i=1;i<=6;i++){
+    var k = age_random[i]
+    $('#age'+(i)).append('<p style="font-size:14pt;word-break:break-all">' + age_data[k-1] + '</p>');
+  }
+
+
+
 
   var turn = 0; //ターン管理変数/奇数：赤番，偶数：青番
 
@@ -10,6 +53,7 @@ $(document).ready(function(){
   $("[id^='no']").on('click',function(){
     //ターンカウントを1増やす
     turn = turn + 1
+    console.log('ターン：'+turn);
     //クリックしたマス目にすでに石が存在するかどうか
     var exist = $(this).text();
 
@@ -28,9 +72,8 @@ $(document).ready(function(){
       //偶数ターンのとき，青
         var result = c.indexOf("red");
         if(result != -1 && exist == ""){
-          //opacity:0.5で仮置きする
-          $(this).append("<p>●</p>").css('opacity','0.5');
-          $(this).children().css('color','#2694ab');
+          //別の色で仮置き
+          $(this).append("<p>●</p>").css('color','#add8e6');
         }else{
           alert("ここにはおけないよ")
           turn = turn -1
@@ -39,8 +82,8 @@ $(document).ready(function(){
       //奇数ターンのとき，赤
       var result = c.indexOf("blue");
       if(result != -1 && exist == ""){
-        //opacity:0.5で仮置きする
-        $(this).append("<p>●</p>").css('opacity','0.5');
+        //別の色で仮置き
+        $(this).append("<p>●</p>").css('color','#ffb6c1');
       }else{
         alert("ここにはおけないよ")
         turn = turn -1
@@ -49,25 +92,39 @@ $(document).ready(function(){
   })//マス目をクリックした時の処理ここまで
 
   //石の確定処理
-  //マスに置ける条件を満たした場合，opacity:1.0にする
+  //マスに置ける条件を満たした場合，確定色に変更する
   $('.img_maru').on('click',function(){
+      now_color = $('#no'+id).children().css('color')
+      if(now_color =="rgb(255, 182, 193)"){
+        //薄いピンクのとき→赤に変更
+        $('#no'+id).children().css('color','#ea7070');
+      }else if (now_color=="rgb(173, 216, 230)") {
+        //薄い青のとき→青に変更
+        $('#no'+id).children().css('color','#2694ab');
+      }
+      // TODO:
+      //挟まっている石の色を変更する
 
-    alert('maru');
-  })
+  });
   //マスにおける条件を満たしていない場合，仮置きを削除
   $('.img_batsu').on('click',function(){
-    alert('batsu');
-  })
+      $('#no'+id).children().remove();
+  });
 
   //検索する
   $('.search_btn').on('click', function() {
     let word = $('.search_text').val()
     window.open('http://www.google.co.jp/search?q=' + word);
   });
-
-
 }); //document.ready内
 
+//関数
+
+//乱数生成
+  function intRandom(min, max){
+    return Math.floor( Math.random() * (max - min + 1)) + min;
+  }
+//周囲のマスのidを取得して配列にして返す
 const surround = function(id){
   //上
   if(id > 6){
@@ -127,7 +184,8 @@ const surround = function(id){
     surroundArray.push(hidarishita);
   return surroundArray
 }
-//枠番号の入った配列を渡す→石が置いてあるかどうかを調べて返す
+
+//枠番号の入った配列を渡す→石が置いてあるかどうかを調べて返す：使わないかも
 const checkSurroundArray = function(array){
   for(i=0;i<array.length;i++){
     var no = array[i]
@@ -140,6 +198,7 @@ const checkSurroundArray = function(array){
   }
     return checkArray
 }
+
 //周囲の石の色を確認する
 const checkColor = function(array){
   for(i=0;i<array.length;i++){
