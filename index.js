@@ -26,7 +26,7 @@ $(document).ready(function(){
     $('#region'+(i)).append('<p style="font-size:14pt">' + region_data[k-1] + '</p>');
   }
   //年代を反映
-  var age_data = ['2000〜','1600<br>〜<br>1800','1200<br>〜<br>1400','1914<br>〜<br>1945','1500<br>〜<br>1700','800<br>〜<br>1000','紀元前','500<br>〜<br>1000'];
+  var age_data = ['2000〜','1400<br>〜<br>1600','1600<br>〜<br>1800','1200<br>〜<br>1400','1914<br>〜<br>1945','1500<br>〜<br>1700','800<br>〜<br>1000','紀元前','500<br>〜<br>1000'];
   age_random = [];
   var age_max = age_data.length;
   //重複しない乱数を生成する
@@ -44,15 +44,10 @@ $(document).ready(function(){
     $('#age'+(i)).append('<p style="font-size:14pt;word-break:break-all">' + age_data[k-1] + '</p>');
   }
 
-
-
-
-  var turn = 0; //ターン管理変数/奇数：赤番，偶数：青番
+  var turn = 1; //ターン管理変数/奇数：赤番，偶数：青番
 
   //マス目をクリックした時の処理
   $("[id^='no']").on('click',function(){
-    //ターンカウントを1増やす
-    turn = turn + 1
     console.log('ターン：'+turn);
     //クリックしたマス目にすでに石が存在するかどうか
     var exist = $(this).text();
@@ -98,17 +93,23 @@ $(document).ready(function(){
       if(now_color =="rgb(255, 182, 193)"){
         //薄いピンクのとき→赤に変更
         $('#no'+id).children().css('color','#ea7070');
+        //ターンカウントを1増やす
+        turn = turn + 1
       }else if (now_color=="rgb(173, 216, 230)") {
         //薄い青のとき→青に変更
         $('#no'+id).children().css('color','#2694ab');
+        //ターンカウントを1増やす
+        turn = turn + 1
       }
-      // TODO:
-      //挟まっている石の色を変更する
+      // TODO:挟まっている石の色を変更する
+      var othelloChallenge = Othello();
 
   });
   //マスにおける条件を満たしていない場合，仮置きを削除
   $('.img_batsu').on('click',function(){
       $('#no'+id).children().remove();
+      //TODO:石の色が変更しているかもしれないので確認する
+
   });
 
   //検索する
@@ -119,11 +120,29 @@ $(document).ready(function(){
 }); //document.ready内
 
 //関数
+//全ての枠の石の色を調査・変更
+const Othello = function(){
+  nowArray = [];
+  //配列に現在のマスの色を格納する
+  for(i=1; i<=36; i++){
+    var = val = $('#no' +i).children().css('color'):
+    if(val == "rgb(38, 148, 171)"){
+      nowArray.push('blue');
+    }else if(val == "rgb(234, 112, 112)"){
+      nowArray.push('red');
+    }else{
+      nowArray.push(0);
+    }//ifおわり
+  } //現在のマスの色格納ここまで
+  
+}//Othello関数終わり
+
 
 //乱数生成
   function intRandom(min, max){
     return Math.floor( Math.random() * (max - min + 1)) + min;
   }
+
 //周囲のマスのidを取得して配列にして返す
 const surround = function(id){
   //上
