@@ -101,8 +101,11 @@ $(document).ready(function(){
         //ターンカウントを1増やす
         turn = turn + 1
       }
-      //挟まっている石の色を変更する
-      //var othelloChallenge = Othello();
+      //TODO:挟まっている石の色を変更する
+      nowArray = [];
+      console.log('id'+id)
+      var othelloChallenge = Othello(id,now_color);
+
 
   });
   //マスにおける条件を満たしていない場合，仮置きを削除
@@ -121,22 +124,109 @@ $(document).ready(function(){
 
 //関数
 //全ての枠の石の色を調査・変更
-/*const Othello = function(){
-  nowArray = [];
+const Othello = function(id,now_color){
   //配列に現在のマスの色を格納する
   for(i=1; i<=36; i++){
-    var = val = $('#no' +i).children().css('color'):
-    if(val == "rgb(38, 148, 171)"){
+    color_val = $('#no' + i).children().css('color');
+    if(color_val == "rgb(38, 148, 171)"){
       nowArray.push('blue');
-    }else if(val == "rgb(234, 112, 112)"){
+    }else if(color_val == "rgb(234, 112, 112)"){
       nowArray.push('red');
     }else{
       nowArray.push(0);
     }//ifおわり
   } //現在のマスの色格納ここまで
+  console.log(nowArray)
+
+
+  //now_color変数の中身を変える
+  //あお：#2694ab あか：#ea7070
+  if(now_color =="rgb(255, 182, 193)"){
+      now_color = "red"
+      obj_color = "blue"
+  }else if(now_color =="rgb(173, 216, 230)"){
+      now_color = "blue"
+      obj_color = "red"
+  }
+  //上方向
+  ueArray=[];
+  for(i=Number(id)-6; i>=1; i=i-6){
+    if(nowArray[i-1] == obj_color){
+      ueArray.push(i);
+    }else if(nowArray[i-1] == now_color){
+      if(ueArray.length>=1){
+        break;
+      }else{
+        ueArray = [];
+      }
+    }else{
+      ueArray = [];
+    }
+  }console.log(ueArray)
+
+  //下方向
+  shitaArray=[];
+  for(i=Number(id)+6; i<=36; i=i+6){
+    if(nowArray[i-1] == obj_color){
+      shitaArray.push(i);
+    }else if(nowArray[i-1] == now_color){
+      if(shitaArray.length>=1){
+        break;
+      }else{
+        shitaArray = [];
+      }
+    }else{
+      shitaArray = [];
+    }
+  }console.log(shitaArray)
+
+  //右方向
+  migiArray=[];
+  if(Number(id) % 6 != 0){
+    for(i=Number(id)+1; i<=6*(Math.floor(Number(id)/6)+1); i++){
+      if(nowArray[i-1] == obj_color){
+        migiArray.push(i)
+      }else if(nowArray[i-1] == now_color){
+        if(migiArray.length >=1){
+          break;
+        }else{
+          migiArray = [];
+        }
+      }else{
+        migiArray = [];
+      }
+    }
+  }else{
+    //6で割り切れるときは6列目なので右方向なし
+  }console.log(migiArray)
+
+  //左方向
+  hidariArray=[];
+  if(Number(id) % 6 !=1){
+    for(i=Number(id)-1;i>=(Math.floor(Number(id)/6)*6)+1;i=i-1){
+      if(nowArray[i-1] == obj_color){
+        hidariArray.push(i)
+      }else if(nowArray[i-1] == now_color){
+        if(hidariArray.length >= 1){
+          break;
+        }else{
+          hidariArray = [];
+        }
+      }else{
+        hidariArray = [];
+      }
+    }
+  }else{
+      //あまり1の時1列目なので左方向なし
+  }console.log(hidariArray)
+
+  //右上方向
+  migiueArray = [];
+
+
 
 }//Othello関数終わり
-*/
+
 
 //乱数生成
   function intRandom(min, max){
