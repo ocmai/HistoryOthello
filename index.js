@@ -222,7 +222,30 @@ const Othello = function(id,now_color){
 
   //右上方向
   migiueArray = [];
-
+  if(Number(id) % 6 != 0 && Number(id) < 6){
+    for(i=Number(id)-5; i>=2; i=i-5){
+      if(nowArray[i-1] == obj_color){
+        migiueArray.push(i)
+      }else if(nowArray[i-1] == now_color){
+        if(migiueArray.length >= 1){
+          break;
+        }else{
+          migiueArray = [];
+        }
+      }else{
+        migiueArray = [];
+      }
+    }
+  }
+  //左上方向
+  hidariueArray = [];
+  if(Number(id) % 6 != 1 && Number(id) < 6){
+    for(i=Number(id)-5; i>=2; i=i-7){
+      if(nowArray[i-1] == obj_color){
+        
+      }
+    }
+  }
 
 
 }//Othello関数終わり
