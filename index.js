@@ -236,17 +236,58 @@ const Othello = function(id,now_color){
         migiueArray = [];
       }
     }
-  }
+  }console.log(migiueArray)
   //左上方向
   hidariueArray = [];
   if(Number(id) % 6 != 1 && Number(id) < 6){
     for(i=Number(id)-5; i>=2; i=i-7){
       if(nowArray[i-1] == obj_color){
-        
+        hidariueArray.push(i)
+      }else if (nowArray[i-1] == now_color) {
+        if(hidariArray.length >= 1){
+          break;
+        }else{
+          hidariueArray = [];
+        }
+      }else{
+        hidariueArray = [];
       }
     }
-  }
-
+  }console.log(hidariueArray)
+  //右下方向
+  migishitaArray = [];
+  if(Number(id) % 6 != 0 && Number(id) < 31){
+    for(i=Number(id)+7; i<=35; i=i+7){
+      if(nowArray[i-1] == obj_color){
+        migishitaArray.push(i)
+      }else if (nowArray[i-1] == now_color) {
+        if(migishitaArray.length >= 1){
+          break;
+        }else{
+          migishitaArray = [];
+        }
+      }else{
+        migishitaArray = [];
+      }
+    }
+  }console.log(migishitaArray)
+  //左下方向
+  hidarishitaArray = [];
+  if(Number(id) % 6 != 1 && Number(id) < 31){
+    for(i=Number(id)+5; i<=35; i=i+5){
+      if(nowArray[i-1] == obj_color){
+      hidariArray.push(i)
+      }else if(nowArray[i-1] == now_color){
+        if(hidarishitaArray.length >= 1){
+          break;
+        }else{
+          hidarishitaArray = [];
+        }
+      }else{
+        hidarishitaArray = [];
+      }
+    }
+  }console.log(hidarishitaArray)
 
 }//Othello関数終わり
 
